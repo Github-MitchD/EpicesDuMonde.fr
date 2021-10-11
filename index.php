@@ -14,6 +14,9 @@ try {
             case "accueil":
                 getPageAccueil();
                 break;
+            case "admin":
+                getPageAdmin();
+                break;
 
             case "error301":
             case "error302":

@@ -115,10 +115,11 @@ a {
 /*             ADMIN CSS             */
 /************************************/
 .admin {
-    background: #fefefe;
+    background: #e7d8d3;
     padding: 20px 30px;
-    border-radius: 10px;
+    border-radius: 5px;
     margin: 10px 0 50px;
+    border: 1px solid #fff;
 }
 .admin h1 {
     color: #333;
@@ -128,6 +129,12 @@ a {
 }
 .admin .table {
     margin-top: 1rem;
+}
+.admin .bi-camera {
+    font-size: 1.5em;
+}
+.table thead th {
+    vertical-align: middle;
 }
 *.btn-sm {
     line-height: 1.2;
@@ -164,7 +171,7 @@ a {
 /* // Medium devices (tablets, 768px and up) */
 @media (min-width: 768px) {
     .header-page {
-        padding-top: 6rem;
+        padding-top: 4rem;
     }    
 }
 /* // Large devices (desktops, 992px and up) */
