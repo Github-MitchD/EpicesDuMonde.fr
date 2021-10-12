@@ -17,6 +17,9 @@ try {
             case "admin":
                 getPageAdmin();
                 break;
+            case "view_epice":
+                getPageViewEpice();
+                break;
 
             case "error301":
             case "error302":

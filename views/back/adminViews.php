@@ -42,9 +42,9 @@ ob_start();
                             <td><?= number_format((float)$epice['price'], 2, '.', ''); ?></td>
 
                             <td width=283>
-                                <a class=" btn btn-warning btn-sm" href="view_epice?id=<?= $epice['id']; ?>" role="button"><i class="bi bi-eye"></i> Voir</a>
-                                <a class="btn btn-info btn-sm" href="update_epice?id=<?= $epice['id']; ?>" role="button"><i class="bi bi-pencil"></i> Modifier</a>
-                                <a class="btn btn-danger btn-sm" href="delete_epice?id=<?= $epice['id']; ?>" role="button"><i class="bi bi-trash"></i> Supprimer</a>
+                                <a class=" btn btn-warning btn-sm" href="view_epice&id=<?= $epice['id']; ?>" role="button"><i class="bi bi-eye"></i> Voir</a>
+                                <a class="btn btn-info btn-sm" href="update_epice&id=<?= $epice['id']; ?>" role="button"><i class="bi bi-pencil"></i> Modifier</a>
+                                <a class="btn btn-danger btn-sm" href="delete_epice&id=<?= $epice['id']; ?>" role="button"><i class="bi bi-trash"></i> Supprimer</a>
                             </td>
                         </tr>
                     <?php } ?>
