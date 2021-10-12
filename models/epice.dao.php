@@ -62,7 +62,7 @@ function getEpiceById($id)
  * @param [type] $price
  * @param string $description
  * @param string $media
- * @return booleen
+ * @return boolean
  */
 function insertArticleIntoBdd($name, $category, $price, $description, $media)
 {
@@ -86,6 +86,17 @@ function insertArticleIntoBdd($name, $category, $price, $description, $media)
     else return false;
 }
 
+/**
+ * Fonction qui permet de mettre a jour un article avec son image
+ *
+ * @param string $name
+ * @param string $price
+ * @param string $description
+ * @param int $category
+ * @param string $media
+ * @param int $id
+ * @return boolean
+ */
 function updateArticleIntoBddWithImg($name, $price, $description, $category, $media, $id)
 {
     $bdd = connexionPDO();
@@ -102,6 +113,16 @@ function updateArticleIntoBddWithImg($name, $price, $description, $category, $me
     else return false;
 }
 
+/**
+ * Fonction qui permet de mettre a jour un article sans son image
+ *
+ * @param string $name
+ * @param string $price
+ * @param string $description
+ * @param int $category
+ * @param int $id
+ * @return boolean
+ */
 function updateArticleIntoBdd($name, $price, $description, $category, $id)
 {
     $bdd = connexionPDO();
@@ -114,6 +135,27 @@ function updateArticleIntoBdd($name, $price, $description, $category, $id)
 
     $stmt->closeCursor();
     // si la requete s'est bien deroulée
+    if ($result > 0) return true;
+    else return false;
+}
+
+/**
+ * Fonction qui permet de supprimer un article en fonction de son id
+ *
+ * @param int $id
+ * @return boolean
+ */
+function deleteEpiceFromBdd($id) {
+
+    $bdd = connexionPDO();
+    $req = ("DELETE FROM items WHERE id = :id");
+    $stmt = $bdd->prepare($req);
+    $stmt->bindValue(":id", $id, PDO::PARAM_INT);
+    $result = $stmt->execute();
+
+    $stmt->closeCursor();
+
+    //si la requete s'est bien deroulée
     if ($result > 0) return true;
     else return false;
 }

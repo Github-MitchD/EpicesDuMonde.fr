@@ -8,6 +8,9 @@ ob_start();
     <div class="container hauteur">
         <div class="header-page px-3 pb-md-4 mx-auto text-center">
             <h1 class="page-title">Administration</h1>
+            <?php if ($alert !== "") {
+                echo afficherAlert($alert, $alertType);
+            } ?>
         </div>
 
         <div class="admin">

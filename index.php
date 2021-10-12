@@ -26,7 +26,12 @@ try {
             case "update_epice":
                 getPageUpdateEpice();
                 break;
-
+            case "delete_epice":
+                getPageDeleteEpice();
+                break;
+            case "confirmDelete":
+                getPageConfirmDeleteEpice();
+                break;
             case "error301":
             case "error302":
             case "error400":

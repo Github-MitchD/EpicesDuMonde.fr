@@ -8,6 +8,7 @@ function getPageAdmin()
 {
     $title = "Page d'admin";
     $metaDescription = "Description de la page d'admin";
+    $alert = "";
 
     $categories = getAllCategories();
     $epices = getAllEpices();
@@ -40,9 +41,9 @@ function getPageAddEpice()
     // grâce à la superglobal POST
     if (!empty($_POST)) {
         //si c'est pas vide, on rempli les variables en les verifiant avec la fonction secureHTML de la classe Securite
-        $name           = Securite::secureHTML($_POST['name']);      
+        $name           = Securite::secureHTML($_POST['name']);
         $category       = Securite::secureHTML($_POST['category']);
-        $price           = Securite::secureHTML($_POST['price']);       
+        $price           = Securite::secureHTML($_POST['price']);
         $description     = Securite::secureHTML($_POST['description']);
 
         //particularité imgage $_FILES, on veut recup son nom & uploader
@@ -50,7 +51,8 @@ function getPageAddEpice()
         //(mediaPath = son chemin) permet de mettre l'image uploadée dans un dossier specifique
         $mediaPath = "public/img/" . basename($media);
         //permet de connaitre l'extension de l'image
-        $mediaExtension = pathinfo($mediaPath,
+        $mediaExtension = pathinfo(
+            $mediaPath,
             PATHINFO_EXTENSION
         );
 
@@ -70,14 +72,15 @@ function getPageAddEpice()
         if (empty($description)) {
             $descriptionError = "Un descriptif d'article est requis";
             $isSuccess = false;
-        }        
+        }
         if (empty($media)) {
             $mediaError = "Vous devez choisir une image";
             $isSuccess = false;
         } else {
             $isUploadSuccess = true;
             //si l'extension n'est pas autorisé
-            if ($mediaExtension != "jpg" && $mediaExtension != "jpeg" && $mediaExtension != "png" && $mediaExtension != "gif"
+            if (
+                $mediaExtension != "jpg" && $mediaExtension != "jpeg" && $mediaExtension != "png" && $mediaExtension != "gif"
             ) {
                 $mediaError = "Le format de l'image n'est pas autorisé";
                 $isUploadSuccess = false;
@@ -102,7 +105,8 @@ function getPageAddEpice()
         }
 
         try {
-            if ($isSuccess && $isUploadSuccess
+            if (
+                $isSuccess && $isUploadSuccess
             ) {
                 if (insertArticleIntoBdd($name, $category, $price, $description, $media)) {
                     $alertType = ALERT_SUCCESS;
@@ -128,7 +132,7 @@ function getPageAddEpice()
 
 
 function getPageUpdateEpice()
-{    
+{
     $nameError = $priceError = $descriptionError = $categoryError = $mediaError = $alert = "";
 
     if (!empty($_GET['id'])) {
@@ -231,4 +235,42 @@ function getPageUpdateEpice()
     $categories = getAllCategories();
 
     require_once 'views/back/updateViews.php';
+}
+
+function getPageDeleteEpice()
+{
+    if (!empty($_GET['id'])) {
+        $id = Securite::secureHTML($_GET['id']);
+    }
+
+    $title = "Page suppression fiche";
+    $description = "Description de la page suppression fiche";
+    $alert = "";
+
+    $epice = getEpiceById($id);
+
+    require_once 'views/back/deleteViews.php';
+}
+
+function getPageConfirmDeleteEpice()
+{
+    $alert = "";
+    $alertType = "";
+    if (!empty($_GET['id'])) {
+        $id = Securite::secureHTML($_GET['id']);
+
+        try {
+            if (deleteEpiceFromBdd($id)) {
+                $alertType = ALERT_SUCCESS;
+                $alert = "La fiche a bien été supprimée";
+                header("Location: admin");
+            } else {
+                $alert = "La suppression de la fiche a échoué";
+                $alertType = ALERT_DANGER;
+            }
+        } catch (Exception $e) {
+            $alert = "La suppression de la fiche a echoué";
+            $alertType = ALERT_DANGER;
+        }
+    }
 }
