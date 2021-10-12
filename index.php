@@ -20,6 +20,9 @@ try {
             case "view_epice":
                 getPageViewEpice();
                 break;
+            case "add_epice":
+                getPageAddEpice();
+                break;
 
             case "error301":
             case "error302":
