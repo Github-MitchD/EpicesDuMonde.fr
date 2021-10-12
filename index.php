@@ -23,6 +23,9 @@ try {
             case "add_epice":
                 getPageAddEpice();
                 break;
+            case "update_epice":
+                getPageUpdateEpice();
+                break;
 
             case "error301":
             case "error302":

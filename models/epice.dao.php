@@ -85,3 +85,35 @@ function insertArticleIntoBdd($name, $category, $price, $description, $media)
     if ($result > 0) return true;
     else return false;
 }
+
+function updateArticleIntoBddWithImg($name, $price, $description, $category, $media, $id)
+{
+    $bdd = connexionPDO();
+
+    $req = "UPDATE items SET name = ?, price = ?, description = ?, category = ?, image = ? WHERE id = ?";
+
+    $stmt = $bdd->prepare($req);
+
+    $result = $stmt->execute(array($name, $price, $description, $category, $media, $id));
+
+    $stmt->closeCursor();
+    // si la requete s'est bien deroulée
+    if ($result > 0) return true;
+    else return false;
+}
+
+function updateArticleIntoBdd($name, $price, $description, $category, $id)
+{
+    $bdd = connexionPDO();
+
+    $req = "UPDATE items SET name = ?, price = ?, description = ?, category = ? WHERE id = ?";
+
+    $stmt = $bdd->prepare($req);
+
+    $result = $stmt->execute(array($name, $price, $description, $category, $id));
+
+    $stmt->closeCursor();
+    // si la requete s'est bien deroulée
+    if ($result > 0) return true;
+    else return false;
+}
